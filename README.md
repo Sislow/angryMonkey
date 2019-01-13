@@ -7,6 +7,16 @@
 - Race condition exists in this code (curl post to /hash with '&&' and then shutdown). Doesn't always show up, but I have seen it preemptively shutdown. Seems to work fine with form via index or multiple calls in different multi terminals
 - Little weak on the test cases. Don't have a full understanding of how the injection is being utilized. Watching a tutorial :)
 
+#### Docker Commands for local:
+- docker build -t angrymonkey .
+- docker run --publish 8080:8080 --name angryMonkey --rm angrymonkey
+- Kill process (two options) 
+ - docker stop angryMonkey (it is automatically removed when closed)
+ - curl http://localhost:8080/shutdown
+##### Docker Notes:
+- The docker command will lock your terminal window. (ctrl + c will not kill the process)
+- Left this in the docker branch specifically. For some reason my form.html will not load with docker. Still tinkering
+
 #### Example Commands:
 ```
 // collect html frontend
