@@ -79,11 +79,13 @@ func handleHash(w http.ResponseWriter, r *http.Request) {
 			// find request if empty check form
 			reqBody, err := ioutil.ReadAll(r.Body)
 			if err != nil {
-				r.ParseForm()
-				c.temp = r.FormValue("password")
-			} else {
-				c.temp = string(reqBody)
-			}
+                                // No need to parse form. This is part reqbody
+                                log.Println("Error: ", err)
+                        } else {
+				// remove the "password="
+                                c.temp = string(reqBody)
+                                c.temp = strings.Replace(c.temp, "password=", "", -1) 
+                        }
 
 			// do not allow blank entries
 			if c.temp != "" {
